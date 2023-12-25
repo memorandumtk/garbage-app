@@ -11,6 +11,10 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+// URL for type of data of Postgres
+// https://www.postgresql.org/docs/current/datatype-numeric.html
+// https://www.prisma.io/docs/orm/reference/prisma-schema-reference
+
 model Spot {
     id        String   @id @default(cuid())
     latitude      Float
