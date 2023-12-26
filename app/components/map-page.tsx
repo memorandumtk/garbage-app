@@ -1,20 +1,38 @@
-// If not use "use client", I got this window is not defined error. which 'Error: window is not defined'.
-// "use client";
+"use client";
 import dynamic from "next/dynamic";
 import React from "react";
+import GetLocation from "./getLocation";
+import { useState, useEffect } from "react";
 
-const MapPage = () => {
+interface Location {
+  latitude: number | null;
+  longitude: number | null;
+}
+
+const MapPage: React.FC = () => {
+  const [location, setLocation] = React.useState<Location>({
+    latitude: null,
+    longitude: null
+  });
+
+  useEffect(() => {
+    GetLocation()
+      .then((loc) => {
+        setLocation(loc)
+      })
+      .catch((error) => console.error("Error getting location:", error));
+  }, []);
+
   const MyMap = React.useMemo(
     () =>
-      dynamic(
-        () => import("./map"),         {
-          loading: () => <p>A map is loading</p>,
-          ssr: false, // This line is important. It's what prevents server-side render
-        }
-      ),
+      dynamic(() => import("./map"), {
+        loading: () => <p>A map is loading</p>,
+        ssr: false, // This line is important. It's what prevents server-side render
+      }),
     []
   );
-  return <MyMap />;
+
+  return <MyMap location={location} />;
 };
 
 export default MapPage;
