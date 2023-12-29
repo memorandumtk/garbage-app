@@ -22,13 +22,13 @@ const ButtonSection = () => {
     longitude: null,
   });
 
+  // If latitude and longitude entered from location button are true, trrigering that, send the recode to server.
   useEffect(() => {
-    // If latitude and longitude entered from location button 
-    // are true, trrigering that, send the recode to server.
     if (record.latitude && record.longitude) {
       sendDataToServer(record);
     }
   }, [record.latitude, record.longitude]);
+  
   const locationHandler = (location: {
     latitude: number | null;
     longitude: number | null;

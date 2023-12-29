@@ -6,18 +6,50 @@ import prisma from "../../../lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export async function POST(request: Request) {
-  // const { latitude, longitude } = await request.json();
-  const requestJson = await request.json();
+  const { paper, general, recycle, latitude, longitude } = await request.json();
 
-  // await prisma.spot.create({
+  const range = 0.0005;
+  const found = await prisma.spot.findFirst({
+    where: {
+      latitude: { gte: latitude - range, lte: latitude + range },
+      longitude: { gte: longitude - range, lte: longitude + range },
+    },
+  });
+
+  console.log(found);
+  if (found) {
+    const updatedRecord = await prisma.spot.update({
+      where: {
+        id: found.id,
+      },
+      data: {
+        paper: paper,
+        general: general,
+        recycle: recycle,
+        latitude: latitude,
+        longitude: longitude,
+      },
+    });
+    return NextResponse.json({
+      message: "this geolocation is already registerd then updated.",
+      updated: updatedRecord,
+    });
+  }
+
+  // const insertResult = await prisma.spot.create({
   //   data: {
-  //     latitude,longitude
-  //   }
+  //     paper,
+  //     general,
+  //     recycle,
+  //     latitude,
+  //     longitude,
+  //   },
   // });
 
   debugger;
 
-  return Response.json({
-    requestJson,
+  return NextResponse.json({
+    founded: found,
+    // inserted: insertResult,
   });
 }

@@ -10,13 +10,13 @@ const PaperButton = ({ handler }: PaperButtonProps) => {
   const [paper, setPaper] = useState(false);
 
   useEffect(() => {
-    console.log("papeer button is clicked and changed.");
+    console.log("paper button is clicked and changed.");
     handler(paper);
   }, [paper]);
 
   const clickHandler = () => {
     setPaper(true);
-    console.log("papeer button is clicked.");
+    console.log("paper button is clicked.");
   };
 
   return <button onClick={clickHandler}>Paper Garbage Box</button>;

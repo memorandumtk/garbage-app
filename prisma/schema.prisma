@@ -6,19 +6,38 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-// URL for type of data of Postgres
+// URL for understanding about type of data of Postgres
 // https://www.postgresql.org/docs/current/datatype-numeric.html
 // https://www.prisma.io/docs/orm/reference/prisma-schema-reference
 
 model Spot {
-    id        String   @id @default(cuid())
-    latitude      Float
-    longitude     Float
-    createdAt DateTime @default(now()) @map(name: "created_at")
+  id        String   @id @default(cuid())
+  paper     Int
+  general   Int
+  recycle   Int
+  latitude  Float
+  longitude Float
+  createdAt DateTime @default(now()) @map(name: "created_at")
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
 }
 
+model User {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String?  @unique
+  image     String?
+  role      Role     @default(USER)
+  marks     Spot[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
