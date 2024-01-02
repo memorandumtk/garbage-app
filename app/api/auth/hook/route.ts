@@ -4,7 +4,7 @@ import prisma from "../../../../lib/prisma";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export async function POST(req: Request) {
-  // debugger;
+  debugger;
   // Ensure the method is POST
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ message: "Method not allowed" }), {
@@ -22,13 +22,15 @@ export async function POST(req: Request) {
     // Check the secret
     if (secret !== process.env.AUTH0_HOOK_SECRET) {
       return new Response(
-        JSON.stringify({ message: `You must provide the correct secret 🤫` }),
+        JSON.stringify({ message: `You must provide the correct secret` }),
         { status: 403 }
       );
     }
 
     // Process the email
     if (email) {
+      // I don't need to care about deplicate to create the user
+      // thanks to @unique functionality?
       await prisma.user.create({
         data: { email },
       });
@@ -49,43 +51,3 @@ export async function POST(req: Request) {
     });
   }
 }
-
-// export default POST;
-
-// export async function POST(req: NextApiRequest, res: NextApiResponse) {
-//  // Parse the request body
-//   const body = req.body;
-//   let email: string | null = null;
-//   let secret: string | null = null;
-//   debugger;
-//     if (typeof body === 'string') {
-//     try {
-//       const jsonBody = JSON.parse(body);
-//       email = jsonBody.email;
-//       secret = jsonBody.secret;
-//     } catch (error) {
-//       return res.status(400).json({ message: 'Invalid JSON body' });
-//     }
-//   }
-//   // const { email, secret } = req.body;
-//   // 1
-//   if (req.method !== 'POST') {
-//     return NextResponse.json({ message: 'Method not allowed' });
-//   }
-//   // 2
-//   if (secret !== process.env.AUTH0_HOOK_SECRET) {
-//     return NextResponse.json({ message: `You must provide the secret` });
-//   }
-//   // 3
-//   if (email) {
-//     // 4
-//     await prisma.user.create({
-//       data: { email },
-//     });
-//     return NextResponse.json({
-//       message: `User with email: ${email} has been created successfully!`,
-//     });
-//   }
-// };
-
-// export default POST;

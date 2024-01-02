@@ -4,6 +4,8 @@ import LocationButton from "./buttons/locationButton";
 import PaperButton from "./buttons/paperButton";
 import GeneralButton from "./buttons/generalButton";
 import RecycleButton from "./buttons/recycleButton";
+import { useUser } from "@auth0/nextjs-auth0/client";
+import { setCookie, getCookie, getCookies } from "cookies-next";
 
 interface Record {
   general: number | null;
@@ -22,13 +24,19 @@ const ButtonSection = () => {
     longitude: null,
   });
 
+  // debugger;
+
   // If latitude and longitude entered from location button are true, trrigering that, send the recode to server.
   useEffect(() => {
     if (record.latitude && record.longitude) {
+      // Get cookie to make inserted record regid by getting user info.
+      const userEmail = getCookie("auth0user");
+      setRecord((prevRecord) => ({ ...prevRecord, userEmail: userEmail }));
       sendDataToServer(record);
     }
   }, [record.latitude, record.longitude]);
-  
+
+  // Handler for passing location information of thre record to location button.
   const locationHandler = (location: {
     latitude: number | null;
     longitude: number | null;
@@ -36,6 +44,7 @@ const ButtonSection = () => {
     setRecord((prevRecord) => ({ ...prevRecord, ...location }));
   };
 
+  // Handler for passing record to each buttons.
   const recordHandler = (key: keyof Record, value: number | null) => {
     setRecord((prevRecord) => {
       return { ...prevRecord, [key]: value };
@@ -70,10 +79,14 @@ const ButtonSection = () => {
         handler={(paperValue) => recordHandler("paper", paperValue ? 1 : 0)}
       />
       <GeneralButton
-        handler={(generalValue) => recordHandler("general", generalValue ? 1 : 0)}
+        handler={(generalValue) =>
+          recordHandler("general", generalValue ? 1 : 0)
+        }
       />
       <RecycleButton
-        handler={(recycleValue) => recordHandler("recycle", recycleValue ? 1 : 0)}
+        handler={(recycleValue) =>
+          recordHandler("recycle", recycleValue ? 1 : 0)
+        }
       />
       <LocationButton handler={locationHandler} />
     </div>
