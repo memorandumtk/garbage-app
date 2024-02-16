@@ -1,4 +1,4 @@
-# Garbase Search App
+# Garbage Search App
 
 ## Reference
 
@@ -17,7 +17,7 @@ https://www.prisma.io/blog/fullstack-nextjs-graphql-prisma-2-fwpc6ds155
 https://medium.com/@tomisinabiodun/displaying-a-leaflet-map-in-nextjs-85f86fccc10c  
 
 ### Latitude and Longitude distance
-- ChatGPT history ​​
+- ChatGPT history
 ```
 User
 How long is 0.001 degrees in latitude 45degree.
@@ -59,8 +59,12 @@ https://developer.auth0.com/resources/guides/web-app/nextjs/basic-authentication
 
 - The way to create public api URL using Ngrok
 https://ngrok.com/docs/getting-started/?os=windows  
+- commands
+```
 npx ngrok config add-authtoken [authtoken]
 npx ngrok http http://localhost:3000  
+npx ngrok http 3000
+```
 
 #### When login function didn't work, It might be needed to log in via `password auth` instead of social auth.
 - Until I realized it, it took long time, almost 1 day...
@@ -69,13 +73,13 @@ https://github.com/auth0-developer-hub/web-app_nextjs_typescript_hello-world
 
 
 ### How to upload a image to AWS S3
-- it is extra traning for myself.
+- it is extra training for myself.
 https://vercel.com/templates/next.js/aws-s3-image-upload-nextjs  
 
 
 ### How to use Cookie -- cookie-next module
 I set cookie, because I need the user information
-for intersing a spot record.  
+for inserting a spot record.  
 https://www.npmjs.com/package/cookies-next  
 
 
@@ -99,7 +103,8 @@ https://react-leaflet.js.org/docs/api-components/#circlemarker-behavior
 https://www.google.com/search?q=rgb+mix&rlz=1C1JCYX_jaJP1052JP1052&oq=rgb+mix&gs_lcrp=EgZjaHJvbWUyBggAEEUYOdIBCDE5NDZqMGo3qAIAsAIA&sourceid=chrome&ie=UTF-8#vhid=g7sf7sY2jHPXEM&vssid=l  
 
 
-## Ref one of example flow to make app
+## Ref two of example as a flow to make app
+https://vercel.com/guides/nextjs-prisma-postgres  
 https://www.prisma.io/blog/fullstack-nextjs-graphql-prisma-4-1k1kc83x3v  
 
 # Each goal of the process of building this app.
