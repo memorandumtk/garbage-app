@@ -20,15 +20,15 @@ export async function GET(request: Request) {
     } else if (value.general === 1 && value.paper === 1) {
       color = "magenta";
     } else if (value.paper === 1 && value.recycle === 1) {
-      color = "yellow";
+      color = "magenta";
     } else if (value.general === 1 && value.recycle === 1) {
-      color = "cyan";
+      color = "magenta";
     } else if (value.general === 1) {
-      color = "blue";
+      color = "gray";
     } else if (value.paper === 1) {
-      color = "red";
+      color = "yellow";
     } else if (value.recycle === 1) {
-      color = "green";
+      color = "cyan";
     }
     colorOptions = { color: color, fillColor: color };
     return { ...value, colorOptions: colorOptions };

@@ -21,12 +21,6 @@ export default function LocationButton({ handler }: LocationButtonProps) {
     longitude: null,
   });
 
-  // useEffect(() => {
-  //   if (location.latitude && location.longitude) {
-  //     sendDataToServer(location);
-  //   }
-  // }, [location.latitude, location.longitude]);
-
   const clickHandler = async () => {
     GetLocation()
       .then((loc) => {
@@ -37,26 +31,11 @@ export default function LocationButton({ handler }: LocationButtonProps) {
       .catch((error) => console.error("Error getting location:", error));
   };
 
-  // const sendDataToServer = async (sentLocation: Location) => {
-  //   try {
-  //     const response = await fetch("/api/spot", {
-  //       method: "POST",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(sentLocation),
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error("Failed to send location data");
-  //     }
-  //     // Handle response here
-  //     const data = await response.json();
-  //     console.log(data);
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
-
-  return <button onClick={clickHandler}>Send Location</button>;
+  return (
+      <button
+          className="w-full border-2 border-black rounded-md p-2 bg-slate-200 hover:bg-slate-300 text-black font-bold text-lg"
+          onClick={clickHandler}>
+        Send!
+      </button>
+  )
 }

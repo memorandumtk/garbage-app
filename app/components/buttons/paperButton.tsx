@@ -19,7 +19,13 @@ const PaperButton = ({ handler }: PaperButtonProps) => {
     console.log("paper button is clicked.");
   };
 
-  return <button onClick={clickHandler}>Paper Garbage Box</button>;
+  return (
+      <button
+          className="border-2 border-black rounded-md p-2 bg-yellow-300 hover:bg-yellow-400 text-black font-bold text-lg"
+          onClick={clickHandler}>
+        Paper
+      </button>
+  )
 };
 
 export default PaperButton;

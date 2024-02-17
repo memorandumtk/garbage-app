@@ -29,15 +29,15 @@ export async function POST( req:Request, res: Response) {
     })
   }
 
-  // debugger;
-  // Searching close garbage box info and update it.
-  const range = 0.0005; // appoxmately lat:111.32m, lon:75.92m
+  // Searching close garbage box info and update it, if there is matched record in db, this will be renewed.
+  const range = 0.0005; // approximately lat:111.32m, lon:75.92m
   const found = await prisma.spot.findFirst({
     where: {
       latitude: { gte: latitude - range, lte: latitude + range },
       longitude: { gte: longitude - range, lte: longitude + range },
     },
   });
+  console.log('spot/route 41')
   console.log(found);
   if (found) {
     const updatedRecord = await prisma.spot.update({

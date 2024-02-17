@@ -2,10 +2,10 @@
 "use client";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
-import { Circle, MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import {Circle, MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import React, { useState, useEffect } from "react";
+import React, {useEffect, useState} from "react";
 
 interface MyMapProps {
   location: {
@@ -20,12 +20,12 @@ const getSpots = async () => {
     headers: { "Content-Type": "application/json" },
   });
   const data = await response.json();
-  const result = data.result;
-  return result;
+  return data.result;
 };
 
 const MyMap: React.FC<MyMapProps> = ({ location }) => {
   // Define a default center position as 'Vancouver city center station'
+  // if failed to get the location from the browser, this will be used.
   const defaultCenter: L.LatLngExpression = [49.28301509909901, -123.1186127];
   // Use the provided location or the default center
   const center: L.LatLngExpression = [

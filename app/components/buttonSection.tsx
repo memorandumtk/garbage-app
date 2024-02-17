@@ -24,12 +24,10 @@ const ButtonSection = () => {
     longitude: null,
   });
 
-  // debugger;
-
-  // If latitude and longitude entered from location button are true, trrigering that, send the recode to server.
+  // If latitude and longitude entered from location button are true, triggering that, send the recode to server.
   useEffect(() => {
     if (record.latitude && record.longitude) {
-      // Get cookie to make inserted record regid by getting user info.
+      // Get cookie to make inserted record be legit by getting user info.
       const userEmail = getCookie("auth0user");
       setRecord((prevRecord) => ({ ...prevRecord, userEmail: userEmail }));
       sendDataToServer(record);
@@ -44,11 +42,12 @@ const ButtonSection = () => {
     setRecord((prevRecord) => ({ ...prevRecord, ...location }));
   };
 
-  // Handler for passing record to each buttons.
+  // Handler for passing record to each button.
   const recordHandler = (key: keyof Record, value: number | null) => {
     setRecord((prevRecord) => {
       return { ...prevRecord, [key]: value };
     });
+    console.log("button section line 50:  %s",key);
   };
 
   const sendDataToServer = async (sentRecord: Record) => {
@@ -66,6 +65,7 @@ const ButtonSection = () => {
       }
       // Handle response here
       const data = await response.json();
+      console.log("button section line 67");
       console.log(data);
     } catch (error) {
       console.error("Error:", error);
@@ -73,23 +73,25 @@ const ButtonSection = () => {
   };
 
   return (
-    <div className="flex-col flex">
-      <p>Buttons Section</p>
-      <PaperButton
-        handler={(paperValue) => recordHandler("paper", paperValue ? 1 : 0)}
-      />
-      <GeneralButton
-        handler={(generalValue) =>
-          recordHandler("general", generalValue ? 1 : 0)
-        }
-      />
-      <RecycleButton
-        handler={(recycleValue) =>
-          recordHandler("recycle", recycleValue ? 1 : 0)
-        }
-      />
-      <LocationButton handler={locationHandler} />
-    </div>
+      <div className="flex-col flex items-center gap-4 py-4">
+        <p className="text-xl">Share which garbage box you see when you found!</p>
+        <div className="flex">
+        <PaperButton
+            handler={(paperValue) => recordHandler("paper", paperValue ? 1 : 0)}
+        />
+        <GeneralButton
+            handler={(generalValue) =>
+                recordHandler("general", generalValue ? 1 : 0)
+            }
+        />
+        <RecycleButton
+            handler={(recycleValue) =>
+                recordHandler("recycle", recycleValue ? 1 : 0)
+            }
+        />
+        </div>
+        <LocationButton handler={locationHandler}/>
+      </div>
   );
 };
 

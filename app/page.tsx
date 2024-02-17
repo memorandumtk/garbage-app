@@ -9,9 +9,9 @@ import { NavBar } from "./components/nav/nav-bar";
 
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <NavBar />
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <main className="flex flex-col items-center justify-between pt-16 px-12">
         <MapPage />
         <ButtonSection />
       </main>

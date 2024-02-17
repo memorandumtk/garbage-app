@@ -2,6 +2,7 @@
   position: fixed;
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-shrink: 0;
   width: 100%;
 
@@ -19,7 +20,7 @@
 
   /* responsive */
 
-  height: 80px;
+  height: 60px;
   max-width: 1200px;
 
   padding: 0 24px;
@@ -45,8 +46,8 @@
 }
 
 .nav-bar__logo {
-  height: 3.2rem;
-  width: 12.2rem;
+  padding: 0 2rem;
+  font-size: 1.6rem;
 }
 
 .nav-bar__tabs {

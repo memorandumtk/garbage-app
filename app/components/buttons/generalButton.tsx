@@ -19,7 +19,13 @@ const GeneralButton = ({ handler }: GeneralButtonProps) => {
     console.log("genera button is clicked.");
   };
 
-  return <button onClick={clickHandler}>General Garbage Box</button>;
+  return (
+      <button
+          className="border-2 border-black rounded-md p-2 bg-slate-700 hover:bg-slate-900 text-white font-bold text-lg"
+          onClick={clickHandler}>
+        General
+      </button>
+  )
 };
 
 export default GeneralButton;
