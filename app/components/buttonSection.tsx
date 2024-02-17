@@ -14,8 +14,13 @@ interface Record {
   latitude: number | null;
   longitude: number | null;
 }
+// Define the props type for ButtonSection
+interface ButtonSectionProps {
+  fetchSpots: () => Promise<void>; // Assuming fetchSpots does not return any specific value
+}
 
-const ButtonSection = () => {
+// Define the ButtonSection component with typed props
+const ButtonSection: React.FC<ButtonSectionProps> = ({ fetchSpots }) => {
   const [record, setRecord] = useState<Record>({
     general: null,
     paper: null,
@@ -40,6 +45,12 @@ const ButtonSection = () => {
     longitude: number | null;
   }) => {
     setRecord((prevRecord) => ({ ...prevRecord, ...location }));
+  };
+
+  // Example button that when clicked, calls fetchSpots
+  const handleButtonClick = async () => {
+    await sendDataToServer(record);
+    await fetchSpots();
   };
 
   // Handler for passing record to each button.
@@ -90,7 +101,7 @@ const ButtonSection = () => {
             }
         />
         </div>
-        <LocationButton handler={locationHandler}/>
+        <LocationButton handler={locationHandler} handleButtonClick={handleButtonClick }/>
       </div>
   );
 };

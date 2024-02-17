@@ -11,19 +11,20 @@ interface MyMapProps {
   location: {
     latitude: number | null;
     longitude: number | null;
-  };
+  },
+  spots: any[];
 }
 
-const getSpots = async () => {
-  const response = await fetch("/api/spot/get-spots", {
-    method: "GET",
-    headers: { "Content-Type": "application/json" },
-  });
-  const data = await response.json();
-  return data.result;
-};
+// const getSpots = async () => {
+//   const response = await fetch("/api/spot/get-spots", {
+//     method: "GET",
+//     headers: { "Content-Type": "application/json" },
+//   });
+//   const data = await response.json();
+//   return data.result;
+// };
 
-const MyMap: React.FC<MyMapProps> = ({ location }) => {
+const MyMap: React.FC<MyMapProps> = ({ location, spots }) => {
   // Define a default center position as 'Vancouver city center station'
   // if failed to get the location from the browser, this will be used.
   const defaultCenter: L.LatLngExpression = [49.28301509909901, -123.1186127];
@@ -36,16 +37,16 @@ const MyMap: React.FC<MyMapProps> = ({ location }) => {
   const styleToken = process.env.NEXT_PUBLIC_MAP_BOX_STYPE_TOKEN;
   const accessToken = process.env.NEXT_PUBLIC_MAP_BOX_ACCESS_TOKEN;
 
-  const [spots, setSpots] = useState<any[]>([]);
-  useEffect(() => {
-    // Fetch spots when the component mounts
-    const fetchSpots = async () => {
-      const fetchedSpots = await getSpots();
-      setSpots(fetchedSpots);
-    };
-    fetchSpots();
-  }, []);
-
+  // const [spots, setSpots] = useState<any[]>([]);
+  // useEffect(() => {
+  //   // Fetch spots when the component mounts
+  //   const fetchSpots = async () => {
+  //     const fetchedSpots = await getSpots();
+  //     setSpots(fetchedSpots);
+  //   };
+  //   fetchSpots();
+  // }, []);
+  //
   return (
     <MapContainer
       center={center}
